@@ -16,123 +16,7 @@ Full-Stack & Backend Developer
 
 ---
 
-<br/>
-
-## 🖥️ Project 2 — The Server Commander
-
-> **Scenario:** A startup needs a dedicated server environment with full OS control to install custom software and security patches.
-
-### Overview
-
-Acting as a SysAdmin, this project covers provisioning a cloud-based virtual server from scratch — launching an EC2 instance, securing it via SSH, installing a web server, and deploying a custom webpage. No managed services, no GUIs — just the terminal.
-
-### Tech Stack
-
-| Layer | Technology |
-|---|---|
-| Cloud Provider | AWS EC2 |
-| OS | Ubuntu 22.04 LTS |
-| Web Server | Nginx 1.24 |
-| Access | SSH (key-pair authentication) |
-| Security | AWS Security Groups + UFW Firewall |
-
-### Step-by-Step Setup
-
-#### Step 1 — Launch EC2 Instance
-
-1. Go to **AWS Console → EC2 → Launch Instance**
-2. Configure:
-   - **Name:** `decodelabs-server`
-   - **AMI:** Ubuntu Server 22.04 LTS (Free Tier eligible)
-   - **Instance Type:** `t2.micro`
-   - **Key Pair:** Create new → download `.pem` file
-   - **Security Group:** Allow **SSH (22)**, **HTTP (80)**, **HTTPS (443)**
-3. Click **Launch Instance**
-
-#### Step 2 — Connect via SSH
-
-```bash
-# Fix permissions on your key file (required on Linux/Mac)
-chmod 400 your-key.pem
-
-# Connect to your instance
-ssh -i "your-key.pem" ubuntu@<YOUR_EC2_PUBLIC_IP>
-```
-
-#### Step 3 — Update the System
-
-```bash
-sudo apt update && sudo apt upgrade -y
-```
-
-#### Step 4 — Install Nginx
-
-```bash
-sudo apt install nginx -y
-sudo systemctl start nginx
-sudo systemctl enable nginx
-sudo systemctl status nginx
-```
-
-Expected output:
-```
-● nginx.service - A high performance web server and a reverse proxy server
-   Active: active (running) since ...
-```
-
-#### Step 5 — Configure Firewall (UFW)
-
-```bash
-sudo ufw allow OpenSSH
-sudo ufw allow 'Nginx Full'
-sudo ufw enable
-sudo ufw status
-```
-
-#### Step 6 — Deploy the Custom Webpage
-
-```bash
-cd /var/www/html
-sudo rm index.nginx-debian.html
-sudo nano index.html
-# Paste index.html contents, then save (Ctrl+O → Enter → Ctrl+X)
-
-sudo chown -R www-data:www-data /var/www/html
-sudo systemctl reload nginx
-```
-
-#### Step 7 — Verify
-
-Navigate to `http://<YOUR_EC2_PUBLIC_IP>` — the **Welcome to DecodeLabs** page should be live. ✅
-
-### Project Structure
-
-```
-project-2-server-commander/
-├── index.html       # Custom "Welcome to DecodeLabs" webpage
-└── README.md
-```
-
-### Security Notes
-
-- SSH restricted to key-pair auth only (password login disabled)
-- AWS Security Groups as the first firewall layer
-- UFW handles OS-level traffic filtering
-- Only ports 22, 80, and 443 exposed to the internet
-
-### Key Concepts
-
-- **Cloud provisioning** — launching and configuring a VM on AWS
-- **SSH security** — key-pair auth and secure remote access
-- **Linux CLI** — package management, file permissions, service control
-- **Web server config** — installing, enabling, and verifying Nginx
-- **Layered firewall** — Security Groups + UFW working together
-
----
-
-<br/>
-
-## 🌍 Project 3 — The Global Launch
+## 🌍 Project 1 — The Global Launch
 
 > **Scenario:** Deploy a personal portfolio as a static site on cloud object storage — no servers, no provisioning, instant global access.
 
@@ -295,3 +179,119 @@ Cloud Computing Internship · DecodeLabs
 ## 📄 License
 
 MIT — free to use, modify, and deploy.
+
+<br/>
+
+## 🖥️ Project 2 — The Server Commander
+
+> **Scenario:** A startup needs a dedicated server environment with full OS control to install custom software and security patches.
+
+### Overview
+
+Acting as a SysAdmin, this project covers provisioning a cloud-based virtual server from scratch — launching an EC2 instance, securing it via SSH, installing a web server, and deploying a custom webpage. No managed services, no GUIs — just the terminal.
+
+### Tech Stack
+
+| Layer | Technology |
+|---|---|
+| Cloud Provider | AWS EC2 |
+| OS | Ubuntu 22.04 LTS |
+| Web Server | Nginx 1.24 |
+| Access | SSH (key-pair authentication) |
+| Security | AWS Security Groups + UFW Firewall |
+
+### Step-by-Step Setup
+
+#### Step 1 — Launch EC2 Instance
+
+1. Go to **AWS Console → EC2 → Launch Instance**
+2. Configure:
+   - **Name:** `decodelabs-server`
+   - **AMI:** Ubuntu Server 22.04 LTS (Free Tier eligible)
+   - **Instance Type:** `t2.micro`
+   - **Key Pair:** Create new → download `.pem` file
+   - **Security Group:** Allow **SSH (22)**, **HTTP (80)**, **HTTPS (443)**
+3. Click **Launch Instance**
+
+#### Step 2 — Connect via SSH
+
+```bash
+# Fix permissions on your key file (required on Linux/Mac)
+chmod 400 your-key.pem
+
+# Connect to your instance
+ssh -i "your-key.pem" ubuntu@<YOUR_EC2_PUBLIC_IP>
+```
+
+#### Step 3 — Update the System
+
+```bash
+sudo apt update && sudo apt upgrade -y
+```
+
+#### Step 4 — Install Nginx
+
+```bash
+sudo apt install nginx -y
+sudo systemctl start nginx
+sudo systemctl enable nginx
+sudo systemctl status nginx
+```
+
+Expected output:
+```
+● nginx.service - A high performance web server and a reverse proxy server
+   Active: active (running) since ...
+```
+
+#### Step 5 — Configure Firewall (UFW)
+
+```bash
+sudo ufw allow OpenSSH
+sudo ufw allow 'Nginx Full'
+sudo ufw enable
+sudo ufw status
+```
+
+#### Step 6 — Deploy the Custom Webpage
+
+```bash
+cd /var/www/html
+sudo rm index.nginx-debian.html
+sudo nano index.html
+# Paste index.html contents, then save (Ctrl+O → Enter → Ctrl+X)
+
+sudo chown -R www-data:www-data /var/www/html
+sudo systemctl reload nginx
+```
+
+#### Step 7 — Verify
+
+Navigate to `http://<YOUR_EC2_PUBLIC_IP>` — the **Welcome to DecodeLabs** page should be live. ✅
+
+### Project Structure
+
+```
+project-2-server-commander/
+├── index.html       # Custom "Welcome to DecodeLabs" webpage
+└── README.md
+```
+
+### Security Notes
+
+- SSH restricted to key-pair auth only (password login disabled)
+- AWS Security Groups as the first firewall layer
+- UFW handles OS-level traffic filtering
+- Only ports 22, 80, and 443 exposed to the internet
+
+### Key Concepts
+
+- **Cloud provisioning** — launching and configuring a VM on AWS
+- **SSH security** — key-pair auth and secure remote access
+- **Linux CLI** — package management, file permissions, service control
+- **Web server config** — installing, enabling, and verifying Nginx
+- **Layered firewall** — Security Groups + UFW working together
+
+---
+
+<br/>
