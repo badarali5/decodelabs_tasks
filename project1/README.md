@@ -177,7 +177,7 @@ Before deploying, update these fields in `index.html`:
 
 ## 👤 Author
 
-**Badar Abbas**  
+**Badar Ali**  
 Software Engineering Student — FAST NUCES Karachi  
 Full-Stack & Backend Developer  
 
