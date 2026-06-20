@@ -1,7 +1,4 @@
-# ☁️ Cloud Computing Internship — Projects Portfolio
-
-**Badar Ali** · Software Engineering Student · FAST NUCES Karachi  
-Full-Stack & Backend Developer
+# ☁️ Cloud Computing 
 
 > A hands-on series of cloud computing projects completed during my internship at **DecodeLabs**, covering server provisioning, static hosting, security, and global deployment on AWS and Azure.
 
